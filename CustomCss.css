@@ -1,0 +1,210 @@
+﻿span {
+    display: block;
+    font: bold 10px "Arial", "Helvetica", sans-serif;
+    color: #000;
+    text-align: center;
+}
+
+
+body {
+    background-image: url(./images/Main/gameBG.jpg);
+    width: auto;
+    height: auto;
+    background-size: cover;
+}
+
+.board {
+    width: 1000px;
+    margin: auto;
+    margin-top: auto;
+}
+
+.row {
+    background: #fff;
+    float: left;
+    margin-bottom: 2px;
+}
+
+#row1,
+#row3 {
+    height: 85px;
+    width: 1200px;
+}
+
+#row2 {
+    width: 1200px;
+}
+
+.col1 {
+    float: left;
+    width: 82px;
+    margin-top: 2px;
+}
+
+.col3 {
+    float: right;
+    margin-right: -15px;
+    /*right column margin*/
+    width: 75px;
+}
+
+.box {
+    background: #fff;
+    border: 1px solid #000;
+    float: left;
+    height: 80px;
+    width: 90px;
+}
+
+div #box-x:last-child {
+    margin-right: 0;
+}
+
+.box-x,
+.box-y {
+    margin-right: 2px;
+}
+
+div #box-y:last-child {
+    margin-bottom: 2px;
+}
+
+.title {
+    background: red;
+    border-bottom: 1px solid #000;
+    line-height: 16px;
+}
+
+#blanktitle {
+    background: none;
+    border-color: #fff;
+}
+
+
+/*******************************
+Board positions - Runway
+********************************/
+
+.runway {
+    background: aliceblue;
+    height: 12px;
+    margin: 2px 0 2px 0;
+}
+
+
+/*"hides" the player position tables*/
+
+.playerpos1,
+.playerpos2 {
+    border: 0px solid black;
+}
+
+
+.cardbody {
+    background: beige;
+    height: 32px;
+}
+
+
+/*control the images of the entire board*/
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30px;
+    height: 30px;
+}
+
+
+/*control the images players*/
+
+.playerimg {
+    display: block;
+    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10px;
+    height: 10px;
+}
+
+.price {
+    line-height: 12px;
+    margin: 2px 0 2px 0;
+    text-align: center;
+    width: 100%;
+}
+
+
+#backgroundimg {
+    background-image: url(./images/Main/mainmenu.jpg);
+    width: 1920px;
+    height: 1080px;
+    background-size: cover;
+    position: fixed;
+}
+
+#mainmenu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+}
+
+#startform {
+    font-size: x-large;
+    font-weight: bold;
+    color: black;
+    margin-top: 15%;
+}
+
+#StartGame {
+    left: 50%;
+    width: 100px;
+    margin-left: -50px;
+    bottom: 0px;
+    position: absolute;
+}
+
+#head {
+    width: 500px;
+    padding-top: 150px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.stats {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.statstable,
+th,
+td {
+    width: auto;
+    height: auto;
+    border: 1px solid black;
+    margin: 0 auto;
+    margin-top: 20%;
+    margin-right: 100px;
+    text-align: center;
+    table-layout: fixed;
+}
+
+#buyproperty {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+}
+
+.continueGame {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+}

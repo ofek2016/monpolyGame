@@ -1,0 +1,192 @@
+﻿<!-- /*
+*this is our final assignment in web development client side course
+*this monopoly game is not 100% functional (according to the real game rules), but it answers the assignment demands.
+*the code is very well commented and explaining.
+*
+*special functions added:
+*F5 disabler - im catching the f5 keypress event and asking the player if he want to reset or to return to the board.
+*this function will NOT cathc ctrl+r , manual refresh (mouse click on the refresh button) or any other sort of refresh*
+*
+*each function as tiny as it is, has its own unique purpose. there is no leftover code and or uneccessary functions.
+*each function does its role to perfection
+*enjoy playing!!!
+*/ -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script src="info.js"></script>
+    <script src="Worker.js"></script>
+    <link href="CustomCss.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Monopoly</title>
+    <!-- checks if the palyer wants to continue the previus game - if such exists -->
+
+    <script>
+        //checks if the local storage is clear. if its clear, show the 
+        $(document).ready(function () {
+            if (localStorage.getItem('players') == null) {
+                $('.continueGame').hide();
+                $('#refreshwaiter').hide()
+                $("#stats").hide();
+                $('#buyproperty').hide();
+                $('#head').show();
+                $('#mainmenu').show();
+            }
+            else {
+                $('#refreshwaiter').hide()
+                $("#stats").hide();
+                $('#buyproperty').hide();
+                $('#head').hide();
+                $('#mainmenu').hide();
+                $('.continueGame').show();
+            }
+        })
+    </script>
+</head>
+
+<body>
+    <!--/************************
+    main menu
+    *************************/-->
+    <div id="backgroundimg">
+        <div id="button"><a href="explanation.html">Go to explenations</a></div>
+        <div class="continueGame">
+            <form>
+                <h1>Do you Want to continue the previous game?</h1>
+                <button type="button" id="continueGameButton" onclick="continueFromPrevGame()">Yes</button>
+                <button type="button" id="dontContinueGameButton" onclick="startNewGame()">No</button>
+            </form>
+        </div>
+
+        <h1 id="head">Monopoly</h1>
+        <div class="mainmenu" id="mainmenu">
+            <!-- StartForm -->
+            <form id="startform">
+                <!--drop down list to select money-->
+                <label for="Money">money to start with:</label>
+                <select name="Moneydropdown" id="Moneydropdown">
+                    <option value="2500">easy - 2500₪</option>
+                    <option value="2000">medium - 2000₪</option>
+                    <option value="1500">hard - 1500₪</option>
+                </select>
+                <br>
+                <!--game subject-->
+                <label for="gametype">game subject:</label>
+                <select name="gametype" id="gametype">
+                    <option value="0">Tech</option>
+                    <option value="1">Netflix</option>
+                </select>
+                <br>
+                <label for="playername1">Player1 name:</label>
+                <input type="text" id="playername1">
+                <br>
+                <label for="playername2">Player2 name:</label>
+                <input type="text" id="playername2">
+                <br><br>
+                <button type="button" id="StartGame" onclick="Init(null)">Start Playing</button>
+            </form>
+        </div>
+    </div>
+    <!-- Refresh Control -->
+    <div id="refreshwaiter">
+        <form>
+            <h1>Do you really want to refresh the board?</h1>
+            <h1>This means you will loose all progress</h1>
+            <button type="button" id="refreshpageyes" onclick="resetBoard()">Yes</button>
+            <button type="button" id="refreshpageno" onclick="returntoboard()">No</button>
+        </form>
+    </div>
+    <!-- Buy Property -->
+    <div id="buyproperty">
+        <form>
+            <h1>Do you Want to buy this property?</h1>
+            <h3 id="buypropertyplayername"></h3>
+            <table>
+                <th class="property">
+                    <!-- here the property properties will be shown dynamically -->
+                </th>
+            </table>
+            <button type="button" id="buy" onclick="BuyProperty()">Buy</button>
+            <button type="button" id="dontbuy" onclick="returntoboard()">Dont Buy</button>
+        </form>
+    </div>
+
+    <!--/************************
+    board
+    *************************/-->
+    <div class="board" id="board">
+        <!-- Board -->
+        <!-- rows and columns -->
+        <div class="row3" id="row2">
+            <!--here the board will be created-->
+        </div>
+        <div class="col3" id="col1">
+            <!--here the board will be created-->
+        </div>
+        <div class="col1" id="col3">
+            <!--here the board will be created-->
+        </div>
+        <div class="row" id="row1">
+            <!--here the board will be created-->
+        </div>
+        <!--stats-->
+        <div class="stats" , id="stats">
+            <form id="gamestats">
+                <table class="statstable">
+                    <tr>
+                        <th id="playerturn"></th>
+                        <th id="player1name"></th>
+                        <th id="player2name"></th>
+                    </tr>
+                    <tr>
+                        <th>money</th>
+                        <td id="player1money"></td>
+                        <td id="player2money"></td>
+                    </tr>
+                    <tr>
+                        <th>properites</th>
+                        <td id="player1property"></td>
+                        <td id="player2property"></td>
+                    </tr>
+                    <tr>
+                        <th>total wealth</th>
+                        <td id="player1wealth"></td>
+                        <td id="player2wealth"></td>
+                    </tr>
+                </table>
+                <!-- Buttons -->
+                <div id="dices">
+                    <input type="button" id="RollDice" onclick="ThrowDice()" value="Roll Dice">
+                    <input type="button" id="resetboardbtn" onclick="EndGame()" value="EndGame">
+                    <table>
+                        <tr id="dicecontainer">
+                            <td id="dice1"></td>
+                            <td id="dice2"></td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        $('.continueGame').hide();
+        $("#stats").hide();
+        $('#buyproperty').hide();
+        $('#mainmenu').show();
+        $('#head').show();
+    </script>
+
+    <script>
+        // check if F5 is being pressed
+        document.addEventListener("keydown", disableF5);
+    </script>
+
+</body>
+
+</html>

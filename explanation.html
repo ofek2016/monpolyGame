@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Project Explenations</title>
+    <script src="Worker.js"></script>
+    <script src="CustomCss.css"></script>
+</head>
+
+<body>
+    <div id="button"><a href="index.html">Go back to game</a></div>
+
+    <h1>Explenations for independent extension </h1>
+
+    <div id="1">
+        <h2>
+            document.addEventListener("keydown", disableF5):
+        </h2>
+        <p>
+            This event catches all keydown events and checks for F5 (refresh operation) "keydown" event.<br>
+            after such key code was identified (key-code 116), the event calls a function named "disableF5()" which is
+            in Worker.js.<br>
+        <h5>*this event catches all keydown events that happen from the keyboard and mouse.</h5>
+        -------------------------------------------------------------------------------------------
+        </p>
+    </div>
+    <div id="2">
+        <h2>
+            disableF5(event):
+        </h2>
+        <p>
+            disableF5(): this function will verify that the key pressed is actually F5 and disables it.<br>
+            after verification that F5 was pressed, it terminates the F5 operation and calls refreshWaiter().<br>
+        <h5>*this function will do nothing if the key code is NOT 116 (F5) <br> *this function will not catch any other
+            kind of refresh operation like Ctrl+R nor manual refresh.</h5>
+        -------------------------------------------------------------------------------------------
+        </p>
+    </div>
+    <div id="3">
+        <h2>refreshWaiter():</h2>
+        <p>
+            This function will hide all menus and the board, and show the player a decision "menu" with two buttons <br>
+            to decide weather to refresh or not.<br>
+            -if the user chose <strong>to refresh</strong>- the local storage will be cleaned,<br>
+            all statistics will be reseted and you will go to the main menu to start a new game<br>
+            -if the user chose <strong>NOT to refresh</strong>- the game board will be shown again (with no game
+            progress nor player statistics changes -game will continue as nothing happend )<br>
+            and all other forms and menus will be hidden<br>
+            -------------------------------------------------------------------------------------------
+        </p>
+    </div>
+</body>
+
+</html>
